@@ -150,6 +150,7 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 	protected void onRefresh() {
 		super.onRefresh();
 		try {
+			//启动web服务，但是还没有真正启动Tomcat
 			createWebServer();
 		}
 		catch (Throwable ex) {
@@ -157,6 +158,7 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 		}
 	}
 
+	//启动容器
 	@Override
 	protected void finishRefresh() {
 		super.finishRefresh();
@@ -176,7 +178,9 @@ public class ServletWebServerApplicationContext extends GenericWebApplicationCon
 		WebServer webServer = this.webServer;
 		ServletContext servletContext = getServletContext();
 		if (webServer == null && servletContext == null) {
+			//webServer是通过ServletWebServerFactory来获取的
 			ServletWebServerFactory factory = getWebServerFactory();
+			//子类实现TomcatServletWebServerFactory
 			this.webServer = factory.getWebServer(getSelfInitializer());
 		}
 		else if (servletContext != null) {
