@@ -79,8 +79,11 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+//自动配置包在默认的情况下就是将：主配置类(@SpringBootApplication)的所在包及其子包里边的组件扫描到Spring容器中。
+//比如说，你用了Spring Data JPA，可能会在实体类上写@Entity注解。这个@Entity注解由@AutoConfigurationPackage扫描并加载，而我们平时开发用的@Controller/@Service/@Component/@Repository这些注解是由ComponentScan来扫描并加载的。
 @AutoConfigurationPackage
 //借助EnableAutoConfigurationImportSelector，@EnableAutoConfiguration可以帮助SpringBoot应用将所有符合条件的@Configuration配置都加载到当前SpringBoot创建并使用的IoC容器。
+//注解的工作原理ImportSelector接口的selectImports返回的数组（类的全类名）都会被纳入到spring容器中。
 @Import(AutoConfigurationImportSelector.class)
 public @interface EnableAutoConfiguration {
 

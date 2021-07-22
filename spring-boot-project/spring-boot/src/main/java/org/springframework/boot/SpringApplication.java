@@ -328,13 +328,13 @@ public class SpringApplication {
 			//创建故障分析器。故障分析器用于提供错误和诊断信息。
 			exceptionReporters = getSpringFactoriesInstances(SpringBootExceptionReporter.class,
 					new Class[] { ConfigurableApplicationContext.class }, context);
-			//对ApplicationContext进行后置处理。对所有可用的ApplicationContextInitializer遍历执行initialize()方法；
+			//#2 对ApplicationContext进行后置处理。对所有可用的ApplicationContextInitializer遍历执行initialize()方法；
 			// 遍历调用所有SpringApplicationRunListener的contextPrepared()方法。
 			// 将之前通过@EnableAutoConfiguration 获取的所有配置以及其他形式的 IoC 容器配置加载到已经准备完毕的 ApplicationContext；
 			// 遍历调用所有SpringApplicationRunListeners 的contextLoaded()方法。
 			//这里就包括通过**@EnableAutoConfiguration**导入的各种自动配置类。
 			prepareContext(context, environment, listeners, applicationArguments, printedBanner);
-			//调用refreshContext()方法执行applicationContext的refresh()方法。
+			//#3 调用refreshContext()方法执行applicationContext的refresh()方法。
 			refreshContext(context);
 			//再一次刷新上下文,其实是空方法，可能是为了后续扩展。
 			afterRefresh(context, applicationArguments);

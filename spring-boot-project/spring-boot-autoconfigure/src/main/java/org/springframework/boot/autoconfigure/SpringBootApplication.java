@@ -49,6 +49,7 @@ import org.springframework.data.repository.Repository;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+//里面是@Configuration
 @SpringBootConfiguration
 //@EnableAutoConfiguration也是借助@Import的帮助，将所有符合自动配置条件的bean定义加载到IoC容器
 //@EnableScheduling是通过@Import将Spring调度框架相关的bean定义都加载到IoC容器。
